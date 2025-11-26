@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI好伴 - AI工具导航</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f8fafc; 
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin: 40px 0;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            color: #1e40af;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 1.2rem;
+            color: #64748b;
+        }
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+        .tool-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .tool-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+        .tool-card h3 {
+            font-size: 1.4rem;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+        .tool-card p {
+            color: #64748b;
+            margin-bottom: 16px;
+        }
+        .btn {
+            display: inline-block;
+            background: #3b82f6;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 AI好伴</h1>
+            <p>精选全球最好用的AI工具，一站式直达官网</p>
+        </div>
+
+        <div class="tools-grid">
+            <div class="tool-card">
+                <h3>ChatGPT</h3>
+                <p>OpenAI推出的智能对话AI，写文章、代码、翻译全能助手</p>
+                <a href="https://chat.openai.com" class="btn" target="_blank">立即使用</a>
+            </div>
+            
+            <div class="tool-card">
+                <h3>Midjourney</h3>
+                <p>AI绘画神器，输入文字描述生成高质量艺术插画</p>
+                <a href="https://midjourney.com" class="btn" target="_blank">立即使用</a>
+            </div>
+            
+            <div class="tool-card">
+                <h3>Claude</h3>
+                <p>Anthropic安全AI助手，处理复杂任务稳定可靠</p>
+                <a href="https://claude.ai" class="btn" target="_blank">立即使用</a>
+            </div>
+            
+            <div class="tool-card">
+                <h3>Gemini</h3>
+                <p>谷歌多模态大模型，支持文本、图像分析理解</p>
+                <a href="https://gemini.google.com" class="btn" target="_blank">立即使用</a>
+            </div>
+            
+            <div class="tool-card">
+                <h3>通义千问</h3>
+                <p>阿里云中文大模型，智能问答、创作助手</p>
+                <a href="https://tongyi.aliyun.com" class="btn" target="_blank">立即使用</a>
+            </div>
+            
+            <div class="tool-card">
+                <h3>文心一言</h3>
+                <p>百度AI聊天工具，中文支持优秀，创意无限</p>
+                <a href="https://yiyan.baidu.com" class="btn" target="_blank">立即使用</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
