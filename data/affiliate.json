@@ -2,29 +2,70 @@
   "affiliateConfig": {
     "enabled": true,
     "defaultCommission": "5%",
-    "trackingDomain": "https://aifanxing.com/go/",
-    "parameters": "?utm_source=ai-tools&utm_medium=affiliate"
+    "trackingDomain": "https://aihaoban.com/go/",
+    "parameters": "?utm_source=aihaoban&utm_medium=affiliate&utm_campaign=tool_click",
+    "autoRedirect": false
   },
   "affiliateLinks": {
     "文心一言": {
       "url": "https://yiyan.baidu.com",
-      "affiliateUrl": "https://aifanxing.com/go/baidu-yiyan",
-      "commission": "3%"
+      "affiliateUrl": "https://aihaoban.com/go/baidu-yiyan",
+      "commission": "3%",
+      "verified": true
     },
     "Gemini": {
       "url": "https://gemini.google.com",
-      "affiliateUrl": "https://aifanxing.com/go/google-gemini",
-      "commission": "5%"
+      "affiliateUrl": "https://aihaoban.com/go/google-gemini",
+      "commission": "5%",
+      "verified": true
     },
     "通义千问": {
       "url": "https://tongyi.aliyun.com",
-      "affiliateUrl": "https://aifanxing.com/go/aliyun-tongyi",
-      "commission": "4%"
+      "affiliateUrl": "https://aihaoban.com/go/aliyun-tongyi",
+      "commission": "4%",
+      "verified": true
     },
     "Grok": {
       "url": "https://grok.x.ai",
-      "affiliateUrl": "https://aifanxing.com/go/xai-grok",
-      "commission": "6%"
+      "affiliateUrl": "https://aihaoban.com/go/xai-grok",
+      "commission": "6%",
+      "verified": true
+    },
+    "即梦AI": {
+      "url": "#",
+      "affiliateUrl": "#",
+      "commission": "0%",
+      "verified": false
+    },
+    "链接写作": {
+      "url": "#",
+      "affiliateUrl": "#",
+      "commission": "0%",
+      "verified": false
+    },
+    "CodePilot": {
+      "url": "#",
+      "affiliateUrl": "#",
+      "commission": "0%",
+      "verified": false
+    },
+    "ArtGenius": {
+      "url": "#",
+      "affiliateUrl": "#",
+      "commission": "0%",
+      "verified": false
+    },
+    "MindMapper": {
+      "url": "#",
+      "affiliateUrl": "#",
+      "commission": "0%",
+      "verified": false
+    },
+    "AudioCraft": {
+      "url": "#",
+      "affiliateUrl": "#",
+      "commission": "0%",
+      "verified": false
     }
   }
 }
