@@ -4,43 +4,65 @@
       "id": "all",
       "name": "全部工具",
       "description": "所有AI工具",
-      "count": 6
+      "count": 10,
+      "icon": "🔍",
+      "color": "#64748b"
     },
     {
       "id": "conversation",
       "name": "对话助手",
       "description": "智能对话和聊天机器人",
-      "count": 4
+      "count": 4,
+      "icon": "💬",
+      "color": "#3b82f6"
     },
     {
       "id": "writing",
       "name": "写作创作",
       "description": "文案写作和内容创作工具",
-      "count": 1
+      "count": 1,
+      "icon": "✍️",
+      "color": "#8b5cf6"
     },
     {
       "id": "design",
       "name": "图像设计",
       "description": "图片生成和设计工具",
-      "count": 0
+      "count": 1,
+      "icon": "🎨",
+      "color": "#ec4899"
     },
     {
       "id": "video",
       "name": "视频制作",
       "description": "视频生成和编辑工具",
-      "count": 1
+      "count": 1,
+      "icon": "🎬",
+      "color": "#f59e0b"
     },
     {
       "id": "programming",
       "name": "编程开发",
       "description": "代码辅助和开发工具",
-      "count": 0
+      "count": 1,
+      "icon": "💻",
+      "color": "#10b981"
     },
     {
       "id": "productivity",
       "name": "办公增效",
       "description": "提高工作效率的工具",
-      "count": 0
+      "count": 1,
+      "icon": "📊",
+      "color": "#06b6d4"
+    },
+    {
+      "id": "audio",
+      "name": "音频处理",
+      "description": "音频编辑和语音处理工具",
+      "count": 1,
+      "icon": "🎵",
+      "color": "#84cc16"
     }
   ]
 }
