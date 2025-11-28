@@ -5,26 +5,138 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI工具集 - 你的智能工具导航伙伴</title>
     
-    <!-- 保持现有CSS引用 -->
-    <link rel="stylesheet" href="css/style.css">
-    
-    <!-- 新增模块化CSS -->
+    <!-- CSS 文件 -->
     <link rel="stylesheet" href="css/core.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <!-- 保留现有样式作为备用 -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- 您现有的HTML内容保持不变 -->
-    <!-- 只根据新设计调整必要的结构 -->
-    
-    <!-- 保持现有JS引用 -->
+    <!-- 顶部导航 -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>AI工具集</h1>
+            </div>
+            <nav class="main-nav">
+                <a href="#" class="nav-item active">每日</a>
+                <a href="#" class="nav-item">快讯</a>
+                <a href="#" class="nav-item">免费</a>
+                <a href="#" class="nav-item">社群</a>
+                <a href="#" class="nav-item">最新</a>
+                <a href="#" class="nav-item">项目</a>
+                <a href="#" class="nav-item">热门</a>
+                <a href="#" class="nav-item">教程</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn btn-outline">搜索</button>
+                <button class="btn btn-outline">菜单</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main class="main-content">
+        <div class="container">
+            <!-- 功能介绍区域 -->
+            <section class="functions-section">
+                <h2>功能介绍</h2>
+                <div class="function-tags">
+                    <span class="tag">会员PPT</span>
+                    <span class="tag">写作</span>
+                    <span class="tag">设计</span>
+                    <span class="tag">对话助手</span>
+                    <span class="tag">图像设计</span>
+                    <span class="tag">视频制作</span>
+                </div>
+            </section>
+
+            <!-- 工具展示区域 -->
+            <section class="tools-section">
+                <h3>精选AI工具</h3>
+                <div class="tools-grid" id="toolsContainer">
+                    <!-- 工具卡片将通过 JavaScript 动态生成 -->
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div>
+                                <h3 class="tool-name">文心一言</h3>
+                                <div class="tool-meta">
+                                    <span class="tool-date">2024/1/14</span>
+                                    <span class="tool-badge free">免费</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="tool-description">百度开发的对话AI，中文理解优秀，适合中文场景，集成百度生态</p>
+                        <div class="tool-features">
+                            <span class="feature-tag">中文优化</span>
+                            <span class="feature-tag">多模态</span>
+                            <span class="feature-tag">百度集成</span>
+                        </div>
+                        <div class="tool-actions">
+                            <a href="#" class="btn btn-primary">访问官网</a>
+                            <a href="#" class="btn btn-outline">查看详情</a>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div>
+                                <h3 class="tool-name">Gemini</h3>
+                                <div class="tool-meta">
+                                    <span class="tool-date">2024/1/14</span>
+                                    <span class="tool-badge free">免费</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="tool-description">谷歌最新大模型，多模态能力强，集成谷歌生态，支持图像理解</p>
+                        <div class="tool-features">
+                            <span class="feature-tag">多模态</span>
+                            <span class="feature-tag">谷歌集成</span>
+                            <span class="feature-tag">实时搜索</span>
+                        </div>
+                        <div class="tool-actions">
+                            <a href="#" class="btn btn-primary">访问官网</a>
+                            <a href="#" class="btn btn-outline">查看详情</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 底部导航 -->
+    <footer class="bottom-nav">
+        <a href="#" class="nav-btn active">
+            <span class="icon">🏠</span>
+            <span>首页</span>
+        </a>
+        <a href="#" class="nav-btn">
+            <span class="icon">📄</span>
+            <span>我的文档</span>
+        </a>
+        <a href="#" class="nav-btn">
+            <span class="icon">📝</span>
+            <span>我的内容</span>
+        </a>
+        <a href="#" class="nav-btn">
+            <span class="icon">🖼️</span>
+            <span>我的素材</span>
+        </a>
+        <a href="#" class="nav-btn">
+            <span class="icon">🔗</span>
+            <span>我的分享</span>
+        </a>
+    </footer>
+
+    <!-- JavaScript 文件 -->
     <script src="js/app.js"></script>
     
     <!-- 新增模块化JS（按依赖顺序） -->
     <script src="js/utils/helpers.js"></script>
-    <script src="js/core/state.js"></script>
     <script src="js/data/tools-db.js"></script>
+    <script src="js/core/state.js"></script>
     <script src="js/modules/navigation.js"></script>
     <script src="js/modules/search.js"></script>
     <script src="js/modules/filters.js"></script>
