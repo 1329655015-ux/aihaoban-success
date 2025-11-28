@@ -4,14 +4,312 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI工具集 - 你的智能工具导航伙伴</title>
-    
-    <!-- CSS 文件 -->
-    <link rel="stylesheet" href="css/core.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <!-- 保留现有样式作为备用 -->
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: #ffffff;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* 头部样式 */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #2563eb;
+        }
+        
+        .main-nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-item {
+            text-decoration: none;
+            color: #64748b;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-item:hover,
+        .nav-item.active {
+            color: #2563eb;
+            background: #f1f5f9;
+        }
+        
+        /* 主要内容 */
+        .main-content {
+            padding: 1.5rem 0;
+            min-height: calc(100vh - 120px);
+        }
+        
+        .functions-section {
+            margin-bottom: 2rem;
+        }
+        
+        .function-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background: #f8fafc;
+            color: #64748b;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+        }
+        
+        .tag.active {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+        
+        /* 工具卡片 */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem 0;
+        }
+        
+        .tool-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            border-color: #2563eb;
+        }
+        
+        .tool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .tool-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.25rem;
+        }
+        
+        .tool-meta {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tool-date, .tool-badge {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            background: #f8fafc;
+            padding: 2px 6px;
+            border-radius: 0.375rem;
+        }
+        
+        .tool-badge.free {
+            background: #10b981;
+            color: white;
+        }
+        
+        .tool-badge.pro {
+            background: #f59e0b;
+            color: white;
+        }
+        
+        .tool-description {
+            color: #64748b;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+        
+        .tool-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-tag {
+            background: #f1f5f9;
+            color: #64748b;
+            padding: 2px 8px;
+            border-radius: 0.375rem;
+            font-size: 0.75rem;
+        }
+        
+        .tool-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #e2e8f0;
+            color: #1e293b;
+        }
+        
+        .btn-outline:hover {
+            border-color: #2563eb;
+            color: #2563eb;
+        }
+        
+        /* 底部导航 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-around;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #64748b;
+            font-size: 0.75rem;
+            padding: 0.25rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+            flex: 1;
+            max-width: 80px;
+        }
+        
+        .nav-btn.active {
+            color: #2563eb;
+        }
+        
+        .nav-btn .icon {
+            font-size: 1.125rem;
+            margin-bottom: 2px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 0.5rem;
+            }
+            
+            .main-nav {
+                display: none;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .function-tags {
+                gap: 0.25rem;
+            }
+            
+            .tag {
+                font-size: 0.75rem;
+                padding: 3px 8px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .tool-card {
+                padding: 1rem;
+            }
+            
+            .tool-features {
+                gap: 0.25rem;
+            }
+            
+            .feature-tag {
+                font-size: 0.7rem;
+                padding: 1px 6px;
+            }
+            
+            .bottom-nav {
+                padding: 8px 0;
+            }
+            
+            .nav-btn {
+                font-size: 0.7rem;
+            }
+            
+            .nav-btn .icon {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- 顶部导航 -->
@@ -44,6 +342,7 @@
             <section class="functions-section">
                 <h2>功能介绍</h2>
                 <div class="function-tags">
+                    <span class="tag active">全部工具</span>
                     <span class="tag">会员PPT</span>
                     <span class="tag">写作</span>
                     <span class="tag">设计</span>
@@ -75,7 +374,7 @@
                             <span class="feature-tag">百度集成</span>
                         </div>
                         <div class="tool-actions">
-                            <a href="#" class="btn btn-primary">访问官网</a>
+                            <a href="https://yiyan.baidu.com" class="btn btn-primary" target="_blank">访问官网</a>
                             <a href="#" class="btn btn-outline">查看详情</a>
                         </div>
                     </div>
@@ -95,6 +394,94 @@
                             <span class="feature-tag">多模态</span>
                             <span class="feature-tag">谷歌集成</span>
                             <span class="feature-tag">实时搜索</span>
+                        </div>
+                        <div class="tool-actions">
+                            <a href="https://gemini.google.com" class="btn btn-primary" target="_blank">访问官网</a>
+                            <a href="#" class="btn btn-outline">查看详情</a>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div>
+                                <h3 class="tool-name">通义千问</h3>
+                                <div class="tool-meta">
+                                    <span class="tool-date">2024/1/12</span>
+                                    <span class="tool-badge free">免费</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="tool-description">阿里云的大模型，在编程和数据分析方面表现突出，适合技术用户</p>
+                        <div class="tool-features">
+                            <span class="feature-tag">编程辅助</span>
+                            <span class="feature-tag">数据分析</span>
+                            <span class="feature-tag">阿里生态</span>
+                        </div>
+                        <div class="tool-actions">
+                            <a href="https://tongyi.aliyun.com" class="btn btn-primary" target="_blank">访问官网</a>
+                            <a href="#" class="btn btn-outline">查看详情</a>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div>
+                                <h3 class="tool-name">Grok</h3>
+                                <div class="tool-meta">
+                                    <span class="tool-date">2024/1/10</span>
+                                    <span class="tool-badge pro">快捷</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="tool-description">马斯克xAI开发，实时网络访问，回答风格幽默直接，信息更新快</p>
+                        <div class="tool-features">
+                            <span class="feature-tag">实时网络</span>
+                            <span class="feature-tag">幽默风格</span>
+                            <span class="feature-tag">快速响应</span>
+                        </div>
+                        <div class="tool-actions">
+                            <a href="https://grok.x.ai" class="btn btn-primary" target="_blank">访问官网</a>
+                            <a href="#" class="btn btn-outline">查看详情</a>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div>
+                                <h3 class="tool-name">即梦AI</h3>
+                                <div class="tool-meta">
+                                    <span class="tool-date">2024/1/08</span>
+                                    <span class="tool-badge free">免费</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="tool-description">文生视频/图生视频，每天免费用，支持多种视频风格</p>
+                        <div class="tool-features">
+                            <span class="feature-tag">视频生成</span>
+                            <span class="feature-tag">免费额度</span>
+                            <span class="feature-tag">多种风格</span>
+                        </div>
+                        <div class="tool-actions">
+                            <a href="#" class="btn btn-primary">访问官网</a>
+                            <a href="#" class="btn btn-outline">查看详情</a>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div>
+                                <h3 class="tool-name">链接写作</h3>
+                                <div class="tool-meta">
+                                    <span class="tool-date">2024/1/05</span>
+                                    <span class="tool-badge pro">专业</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="tool-description">AI一键生成小说，多种模板选择，支持长篇创作</p>
+                        <div class="tool-features">
+                            <span class="feature-tag">创作辅助</span>
+                            <span class="feature-tag">小说模板</span>
+                            <span class="feature-tag">长篇支持</span>
                         </div>
                         <div class="tool-actions">
                             <a href="#" class="btn btn-primary">访问官网</a>
@@ -130,16 +517,58 @@
         </a>
     </footer>
 
-    <!-- JavaScript 文件 -->
-    <script src="js/app.js"></script>
-    
-    <!-- 新增模块化JS（按依赖顺序） -->
-    <script src="js/utils/helpers.js"></script>
-    <script src="js/data/tools-db.js"></script>
-    <script src="js/core/state.js"></script>
-    <script src="js/modules/navigation.js"></script>
-    <script src="js/modules/search.js"></script>
-    <script src="js/modules/filters.js"></script>
-    <script src="js/core/app-core.js"></script>
+    <script>
+        // 基础交互功能
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('AI工具集已加载');
+            
+            // 分类标签点击事件
+            const functionTags = document.querySelectorAll('.function-tags .tag');
+            functionTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    // 移除其他标签的active类
+                    functionTags.forEach(t => t.classList.remove('active'));
+                    // 给当前点击的标签添加active类
+                    this.classList.add('active');
+                    
+                    const category = this.textContent;
+                    console.log('选择了分类:', category);
+                    // 这里可以添加分类筛选逻辑
+                });
+            });
+            
+            // 底部导航点击事件
+            const navButtons = document.querySelectorAll('.bottom-nav .nav-btn');
+            navButtons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // 移除其他按钮的active类
+                    navButtons.forEach(b => b.classList.remove('active'));
+                    // 给当前点击的按钮添加active类
+                    this.classList.add('active');
+                    
+                    const page = this.querySelector('span:last-child').textContent;
+                    console.log('切换到页面:', page);
+                    // 这里可以添加页面切换逻辑
+                });
+            });
+            
+            // 顶部导航点击事件
+            const navItems = document.querySelectorAll('.main-nav .nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // 移除其他项目的active类
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    // 添加active类到当前项目
+                    this.classList.add('active');
+                    
+                    const navType = this.textContent;
+                    console.log('切换到导航:', navType);
+                    // 这里可以添加导航切换逻辑
+                });
+            });
+        });
+    </script>
 </body>
 </html>
