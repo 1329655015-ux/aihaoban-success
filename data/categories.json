@@ -1,1 +1,46 @@
-{}
+{
+  "categories": [
+    {
+      "id": "all",
+      "name": "全部工具",
+      "description": "所有AI工具",
+      "count": 6
+    },
+    {
+      "id": "conversation",
+      "name": "对话助手",
+      "description": "智能对话和聊天机器人",
+      "count": 4
+    },
+    {
+      "id": "writing",
+      "name": "写作创作",
+      "description": "文案写作和内容创作工具",
+      "count": 1
+    },
+    {
+      "id": "design",
+      "name": "图像设计",
+      "description": "图片生成和设计工具",
+      "count": 0
+    },
+    {
+      "id": "video",
+      "name": "视频制作",
+      "description": "视频生成和编辑工具",
+      "count": 1
+    },
+    {
+      "id": "programming",
+      "name": "编程开发",
+      "description": "代码辅助和开发工具",
+      "count": 0
+    },
+    {
+      "id": "productivity",
+      "name": "办公增效",
+      "description": "提高工作效率的工具",
+      "count": 0
+    }
+  ]
+}
