@@ -1,1 +1,63 @@
-/* core */
+/* 平板设备 */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 var(--space-sm);
+    }
+    
+    .main-nav {
+        display: none;
+    }
+    
+    .tools-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+    
+    .header-actions {
+        display: flex;
+    }
+    
+    .function-tags {
+        gap: var(--space-xs);
+    }
+    
+    .tag {
+        font-size: var(--font-size-xs);
+        padding: 3px 8px;
+    }
+}
+
+/* 手机设备 */
+@media (max-width: 480px) {
+    .tool-card {
+        padding: var(--space-md);
+    }
+    
+    .tool-features {
+        gap: var(--space-xs);
+    }
+    
+    .feature-tag {
+        font-size: 0.7rem;
+        padding: 1px 6px;
+    }
+    
+    .bottom-nav {
+        padding: 8px 0;
+    }
+    
+    .nav-btn {
+        font-size: 0.7rem;
+    }
+    
+    .nav-btn .icon {
+        font-size: var(--font-size-base);
+    }
+}
+
+/* 大屏设备 */
+@media (min-width: 1200px) {
+    .tools-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
