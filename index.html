@@ -3,20 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI工具集</title>
+    <title>AI工具集 - 你的智能工具导航伙伴</title>
     
-    <!-- 方案A：使用模块化CSS -->
+    <!-- 保持现有CSS引用 -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- 新增模块化CSS -->
     <link rel="stylesheet" href="css/core.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/responsive.css">
-    <!-- 或者方案B：保留现有style.css -->
-    <!-- <link rel="stylesheet" href="css/style.css"> -->
 </head>
 <body>
-    <!-- 您现有的HTML结构 -->
+    <!-- 您现有的HTML内容保持不变 -->
+    <!-- 只根据新设计调整必要的结构 -->
     
-    <!-- JavaScript 文件 -->
-    <script type="module" src="js/app.js"></script>
+    <!-- 保持现有JS引用 -->
+    <script src="js/app.js"></script>
+    
+    <!-- 新增模块化JS（按依赖顺序） -->
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/core/state.js"></script>
+    <script src="js/data/tools-db.js"></script>
+    <script src="js/modules/navigation.js"></script>
+    <script src="js/modules/search.js"></script>
+    <script src="js/modules/filters.js"></script>
+    <script src="js/core/app-core.js"></script>
 </body>
 </html>
