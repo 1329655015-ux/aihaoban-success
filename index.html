@@ -3,68 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI好伴 - 智能AI工具导航</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>AI工具集</title>
+    
+    <!-- 方案A：使用模块化CSS -->
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- 或者方案B：保留现有style.css -->
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
 </head>
 <body>
-    <div class="app-container">
-        <!-- 移动端菜单 -->
-        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-        
-        <!-- 左侧导航 -->
-        <nav class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo">
-                    <div class="logo-icon">伴</div>
-                    <div class="logo-text">AI好伴</div>
-                </div>
-                <div class="logo-slogan">你的智能工具导航伙伴</div>
-            </div>
-            
-            <div class="nav-section">
-                <div class="nav-title">主要分类</div>
-                <ul class="nav-list">
-                    <li class="nav-item active" data-category="all">🏠 全部工具</li>
-                    <li class="nav-item" data-category="chat">🤖 对话助手</li>
-                    <li class="nav-item" data-category="design">🎨 图像设计</li>
-                    <li class="nav-item" data-category="video">🎬 视频制作</li>
-                    <li class="nav-item" data-category="writing">✍️ 写作创作</li>
-                    <li class="nav-item" data-category="code">💻 编程开发</li>
-                </ul>
-            </div>
-        </nav>
-
-        <!-- 主内容区 -->
-        <main class="main-content">
-            <!-- 顶部搜索 -->
-            <div class="top-bar">
-                <div class="search-container">
-                    <div class="search-icon">🔍</div>
-                    <input type="text" class="search-box" placeholder="搜索AI工具..." id="searchInput">
-                </div>
-            </div>
-
-            <!-- 内容区 -->
-            <div class="content-container">
-                <div class="page-header">
-                    <h1 class="page-title">探索AI的无限可能</h1>
-                    <p class="page-description">精选AI工具，覆盖全行业应用场景</p>
-                </div>
-
-                <!-- 工具展示 -->
-                <div class="tools-container">
-                    <div class="tools-header">
-                        <h2 class="section-title">热门AI工具</h2>
-                    </div>
-                    <div class="tools-grid" id="toolsGrid">
-                        <!-- 工具卡片动态生成 -->
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- 所有JS在一个文件 -->
-    <script src="js/app.js"></script>
+    <!-- 您现有的HTML结构 -->
+    
+    <!-- JavaScript 文件 -->
+    <script type="module" src="js/app.js"></script>
 </body>
 </html>
