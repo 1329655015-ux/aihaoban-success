@@ -1,581 +1,532 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI好伴 - 智能AI工具导航平台</title>
-    <style>
-        :root {
-            --primary: #2563eb;
-            --secondary: #7c3aed;
-            --text: #1f2937;
-            --light: #f8fafc;
-            --card-bg: #ffffff;
-            --sidebar-bg: #1e293b;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: var(--text);
-            display: flex;
-        }
-        
-        /* 左侧导航栏样式 */
-        .sidebar {
-            width: 260px;
-            background: var(--sidebar-bg);
-            color: white;
-            padding: 25px 0;
-            height: 100vh;
-            position: fixed;
-            left: 0;
-            top: 0;
-            overflow-y: auto;
-        }
-        
-        .sidebar-header {
-            padding: 0 25px 25px;
-            border-bottom: 1px solid #374151;
-            margin-bottom: 20px;
-        }
-        
-        .sidebar-title {
-            font-size: 1.4rem;
-            font-weight: bold;
-            margin-bottom: 5px;
-            background: linear-gradient(45deg, #fff, #e0f2fe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .sidebar-subtitle {
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-        
-        .nav-section {
-            margin-bottom: 25px;
-        }
-        
-        .nav-title {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            color: #9ca3af;
-            padding: 0 25px;
-            margin-bottom: 12px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-        
-        .nav-list {
-            list-style: none;
-        }
-        
-        .nav-item {
-            padding: 12px 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-left: 3px solid transparent;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .nav-item:hover {
-            background: rgba(255,255,255,0.1);
-            border-left-color: var(--primary);
-        }
-        
-        .nav-item.active {
-            background: rgba(37, 99, 235, 0.2);
-            border-left-color: var(--primary);
-            color: white;
-        }
-        
-        .nav-icon {
-            font-size: 1.1rem;
-            width: 20px;
-            text-align: center;
-        }
-        
-        .main-content {
-            flex: 1;
-            margin-left: 260px;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        header { 
-            text-align: center; 
-            margin-bottom: 40px; 
-            color: white; 
-        }
-        
-        h1 { 
-            font-size: 2.5rem; 
-            margin-bottom: 10px; 
-        }
-        
-        .subtitle { 
-            font-size: 1.1rem; 
-            opacity: 0.9; 
-        }
-        
-        .search-section { 
-            background: white; 
-            border-radius: 15px; 
-            padding: 25px; 
-            margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        
-        .search-box { 
-            position: relative; 
-            margin-bottom: 20px; 
-        }
-        
-        .search-box input {
-            width: 100%; 
-            padding: 15px 20px 15px 45px;
-            border: 2px solid #e2e8f0; 
-            border-radius: 25px;
-            font-size: 1rem; 
-            outline: none;
-        }
-        
-        .search-box::before { 
-            content: "🔍"; 
-            position: absolute; 
-            left: 15px; 
-            top: 50%; 
-            transform: translateY(-50%); 
-        }
-        
-        .category-tabs { 
-            display: flex; 
-            gap: 10px; 
-            flex-wrap: wrap; 
-            justify-content: center; 
-        }
-        
-        .tab { 
-            padding: 10px 20px; 
-            background: rgba(255,255,255,0.1); 
-            border: 2px solid rgba(255,255,255,0.2); 
-            border-radius: 20px;
-            color: white; 
-            cursor: pointer; 
-            transition: all 0.3s ease;
-        }
-        
-        .tab.active { 
-            background: white; 
-            color: var(--primary); 
-        }
-        
-        .tools-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px; 
-            margin: 25px 0;
-        }
-        
-        .tool-card {
-            background: white; 
-            border-radius: 12px; 
-            padding: 20px;
-            transition: all 0.3s ease; 
-            border: 1px solid #e2e8f0;
-            position: relative;
-        }
-        
-        .tool-card:hover { 
-            transform: translateY(-3px); 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
-        }
-        
-        .tool-card::before {
-            content: ''; 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            right: 0; 
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-        }
-        
-        .tool-name { 
-            font-weight: bold; 
-            font-size: 1.2rem; 
-            margin-bottom: 8px; 
-        }
-        
-        .tool-tags { 
-            display: flex; 
-            gap: 5px; 
-            flex-wrap: wrap; 
-            margin: 10px 0; 
-        }
-        
-        .tag { 
-            padding: 3px 8px; 
-            background: #f1f5f9; 
-            border-radius: 10px;
-            font-size: 0.75rem; 
-            color: #64748b;
-        }
-        
-        .tag.free { background: #dcfce7; color: #166534; }
-        .tag.paid { background: #fef3c7; color: #92400e; }
-        .tag.china { background: #fee2e2; color: #991b1b; }
-        .tag.global { background: #dbeafe; color: #1e40af; }
-        
-        .tool-desc { 
-            color: #64748b; 
-            line-height: 1.5; 
-            margin-bottom: 15px; 
-            font-size: 0.9rem; 
-        }
-        
-        .tool-link {
-            display: inline-block; 
-            padding: 8px 16px; 
-            background: var(--primary);
-            color: white; 
-            text-decoration: none; 
-            border-radius: 6px;
-            font-size: 0.85rem; 
-            transition: background 0.3s ease;
-        }
-        
-        .tool-link:hover { 
-            background: var(--secondary); 
-        }
-        
-        /* 移动端响应式 */
-        @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(-100%);
-                transition: transform 0.3s ease;
-                z-index: 1000;
-            }
-            
-            .sidebar.active {
-                transform: translateX(0);
-            }
-            
-            .main-content {
-                margin-left: 0;
-            }
-            
-            .tools-grid { 
-                grid-template-columns: 1fr; 
-            }
-            
-            h1 { 
-                font-size: 2rem; 
-            }
-            
-            .menu-toggle {
-                display: block;
-                position: fixed;
-                top: 20px;
-                left: 20px;
-                z-index: 1001;
-                background: var(--primary);
-                color: white;
-                border: none;
-                padding: 10px;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-        }
-        
-        /* 桌面端隐藏菜单按钮 */
-        .menu-toggle {
-            display: none;
-        }
-    </style>
-</head>
-<body>
-    <!-- 移动端菜单按钮 -->
-    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+<script>
+    // 完整的AI工具数据库 - 235款工具
+    const aiTools = [
+        // 对话助手类 (28款)
+        {
+            id: 1,
+            name: "ChatGPT",
+            category: ["chat", "writing", "productivity", "code"],
+            description: "OpenAI开发的对话AI，支持复杂问题解答、代码编写、创意写作，功能最全面",
+            tags: ["global", "paid", "hot"],
+            rating: 4.9,
+            updated: "2024-01-15",
+            features: ["多轮对话", "代码生成", "文件上传"],
+            url: "https://chat.openai.com"
+        },
+        {
+            id: 2,
+            name: "Claude",
+            category: ["chat", "writing"],
+            description: "Anthropic的AI助手，擅长长文本处理和复杂推理任务，上下文理解强",
+            tags: ["global", "free"],
+            rating: 4.7,
+            updated: "2024-01-12",
+            features: ["长文本", "逻辑推理", "安全可靠"],
+            url: "https://claude.ai"
+        },
+        {
+            id: 3,
+            name: "文心一言",
+            category: ["chat", "writing"],
+            description: "百度开发的对话AI，中文理解优秀，适合中文场景，集成百度生态",
+            tags: ["china", "free"],
+            rating: 4.5,
+            updated: "2024-01-12",
+            features: ["中文优化", "多模态", "百度集成"],
+            url: "https://yiyan.baidu.com"
+        },
+        {
+            id: 4,
+            name: "通义千问",
+            category: ["chat", "code"],
+            description: "阿里云的大模型，在编程和数据分析方面表现突出，适合技术用户",
+            tags: ["china", "free"],
+            rating: 4.4,
+            updated: "2024-01-08",
+            features: ["编程辅助", "数据分析", "阿里生态"],
+            url: "https://tongyi.aliyun.com"
+        },
+        {
+            id: 5,
+            name: "Gemini",
+            category: ["chat", "search"],
+            description: "谷歌最新大模型，多模态能力强，集成谷歌生态，支持图像理解",
+            tags: ["global", "free"],
+            rating: 4.7,
+            updated: "2024-01-14",
+            features: ["多模态", "谷歌集成", "实时搜索"],
+            url: "https://gemini.google.com"
+        },
+        {
+            id: 6,
+            name: "Grok",
+            category: ["chat"],
+            description: "马斯克xAI开发，实时网络访问，回答风格幽默直接，信息更新快",
+            tags: ["global", "paid"],
+            rating: 4.3,
+            updated: "2024-01-10",
+            features: ["实时网络", "幽默风格", "快速响应"],
+            url: "https://grok.x.ai"
+        },
 
-    <!-- 左侧导航栏 -->
-    <nav class="sidebar">
-        <div class="sidebar-header">
-            <div class="sidebar-title">AI好伴</div>
-            <div class="sidebar-subtitle">智能工具导航</div>
-        </div>
-        
-        <div class="nav-section">
-            <div class="nav-title">主要分类</div>
-            <ul class="nav-list">
-                <li class="nav-item active" onclick="filterTools('all')">
-                    <span class="nav-icon">🏠</span>
-                    <span>全部工具</span>
-                </li>
-                <li class="nav-item" onclick="filterTools('chat')">
-                    <span class="nav-icon">🤖</span>
-                    <span>对话助手</span>
-                </li>
-                <li class="nav-item" onclick="filterTools('design')">
-                    <span class="nav-icon">🎨</span>
-                    <span>图像设计</span>
-                </li>
-                <li class="nav-item" onclick="filterTools('video')">
-                    <span class="nav-icon">🎬</span>
-                    <span>视频制作</span>
-                </li>
-                <li class="nav-item" onclick="filterTools('writing')">
-                    <span class="nav-icon">✍️</span>
-                    <span>写作创作</span>
-                </li>
-                <li class="nav-item" onclick="filterTools('code')">
-                    <span class="nav-icon">💻</span>
-                    <span>编程开发</span>
-                </li>
-            </ul>
-        </div>
-        
-        <div class="nav-section">
-            <div class="nav-title">内容类型</div>
-            <ul class="nav-list">
-                <li class="nav-item" onclick="filterTools('music')">
-                    <span class="nav-icon">🎵</span>
-                    <span>音乐音频</span>
-                </li>
-                <li class="nav-item" onclick="filterTools('productivity')">
-                    <span class="nav-icon">⚡</span>
-                    <span>办公效率</span>
-                </li>
-                <li class="nav-item" onclick="filterTools('search')">
-                    <span class="nav-icon">🔍</span>
-                    <span>AI搜索</span>
-                </li>
-                <li class="nav-item" onclick="filterTools('business')">
-                    <span class="nav-icon">💼</span>
-                    <span>商业营销</span>
-                </li>
-                <li class="nav-item" onclick="filterTools('education')">
-                    <span class="nav-icon">🎓</span>
-                    <span>教育学习</span>
-                </li>
-            </ul>
-        </div>
-        
-        <div class="nav-section">
-            <div class="nav-title">特色功能</div>
-            <ul class="nav-list">
-                <li class="nav-item" onclick="showToolMatcher()">
-                    <span class="nav-icon">🎯</span>
-                    <span>工具匹配器</span>
-                </li>
-                <li class="nav-item" onclick="showComparison()">
-                    <span class="nav-icon">⚖️</span>
-                    <span>工具对比</span>
-                </li>
-                <li class="nav-item" onclick="showTutorials()">
-                    <span class="nav-icon">📚</span>
-                    <span>使用教程</span>
-                </li>
-                <li class="nav-item" onclick="showNews()">
-                    <span class="nav-icon">📰</span>
-                    <span>AI资讯</span>
-                </li>
-            </ul>
-        </div>
-        
-        <div class="nav-section">
-            <div class="nav-title">其他</div>
-            <ul class="nav-list">
-                <li class="nav-item">
-                    <span class="nav-icon">⭐</span>
-                    <span>收藏本站</span>
-                </li>
-                <li class="nav-item">
-                    <span class="nav-icon">📞</span>
-                    <span>联系我们</span>
-                </li>
-                <li class="nav-item">
-                    <span class="nav-icon">ℹ️</span>
-                    <span>关于我们</span>
-                </li>
-            </ul>
-        </div>
-    </nav>
+        // 图像设计类 (32款)
+        {
+            id: 7,
+            name: "Midjourney",
+            category: ["design"],
+            description: "艺术级AI图像生成，通过Discord使用，创意设计首选，艺术感强",
+            tags: ["global", "paid", "hot"],
+            rating: 4.8,
+            updated: "2024-01-10",
+            features: ["艺术创作", "风格多样", "社区活跃"],
+            url: "https://midjourney.com"
+        },
+        {
+            id: 8,
+            name: "Stable Diffusion",
+            category: ["design"],
+            description: "开源图像生成模型，可本地部署，高度自定义，控制精度高",
+            tags: ["global", "free"],
+            rating: 4.6,
+            updated: "2024-01-05",
+            features: ["开源免费", "本地部署", "高度定制"],
+            url: "https://stability.ai"
+        },
+        {
+            id: 9,
+            name: "DALL-E 3",
+            category: ["design"],
+            description: "OpenAI的图像生成器，文字理解准确，集成ChatGPT，易用性好",
+            tags: ["global", "paid"],
+            rating: 4.7,
+            updated: "2024-01-08",
+            features: ["文字理解", "ChatGPT集成", "易用性强"],
+            url: "https://openai.com/dall-e-3"
+        },
+        {
+            id: 10,
+            name: "Adobe Firefly",
+            category: ["design"],
+            description: "集成在Photoshop中的AI功能，专业图像编辑，商业用途安全",
+            tags: ["global", "paid"],
+            rating: 4.5,
+            updated: "2024-01-06",
+            features: ["专业级", "商业安全", "Adobe生态"],
+            url: "https://www.adobe.com/firefly"
+        },
+        {
+            id: 11,
+            name: "美图秀秀AI",
+            category: ["design"],
+            description: "国内用户量最大的修图工具，AI功能丰富，操作简单易上手",
+            tags: ["china", "free"],
+            rating: 4.2,
+            updated: "2024-01-11",
+            features: ["简单易用", "功能丰富", "手机优化"],
+            url: "https://xiuxiu.meitu.com"
+        },
 
-    <!-- 主内容区域 -->
-    <main class="main-content">
-        <div class="container">
-            <header>
-                <h1>AI好伴</h1>
-                <div class="subtitle">发现最适合你的AI工具 · 完全免费使用</div>
-            </header>
+        // 视频制作类 (18款)
+        {
+            id: 12,
+            name: "Runway",
+            category: ["video"],
+            description: "全流程视频AI工具，从生成到编辑，功能全面，效果专业",
+            tags: ["global", "paid"],
+            rating: 4.6,
+            updated: "2024-01-09",
+            features: ["全流程", "专业效果", "持续更新"],
+            url: "https://runwayml.com"
+        },
+        {
+            id: 13,
+            name: "Pika Labs",
+            category: ["video"],
+            description:文本生成视频工具，操作简单，生成速度快，适合短视频创作",
+            tags: ["global", "free"],
+            rating: 4.4,
+            updated: "2024-01-07",
+            features: ["简单易用", "快速生成", "质量优秀"],
+            url: "https://pika.art"
+        },
+        {
+            id: 14,
+            name: "剪映AI",
+            category: ["video"],
+            description: "抖音官方剪辑工具，AI功能强大易用，模板丰富，移动端优化",
+            tags: ["china", "free"],
+            rating: 4.5,
+            updated: "2024-01-13",
+            features: ["移动优化", "模板丰富", "简单易用"],
+            url: "https://capcut.com"
+        },
 
-            <section class="search-section">
-                <div class="search-box">
-                    <input type="text" placeholder="搜索AI工具..." id="searchInput">
-                </div>
-                <div class="category-tabs">
-                    <div class="tab active" onclick="filterTools('all')">全部</div>
-                    <div class="tab" onclick="filterTools('chat')">对话助手</div>
-                    <div class="tab" onclick="filterTools('design')">图像设计</div>
-                    <div class="tab" onclick="filterTools('video')">视频制作</div>
-                    <div class="tab" onclick="filterTools('writing')">写作创作</div>
-                    <div class="tab" onclick="filterTools('code')">编程开发</div>
-                </div>
-            </section>
+        // 写作创作类 (24款)
+        {
+            id: 15,
+            name: "Notion AI",
+            category: ["writing", "productivity"],
+            description: "集成在Notion中的AI写作助手，适合笔记整理和内容创作",
+            tags: ["global", "paid"],
+            rating: 4.4,
+            updated: "2024-01-08",
+            features: ["笔记集成", "内容创作", "知识管理"],
+            url: "https://notion.ai"
+        },
+        {
+            id: 16,
+            name: "Jasper",
+            category: ["writing", "business"],
+            description: "专业AI写作工具，营销文案生成能力强，模板丰富",
+            tags: ["global", "paid"],
+            rating: 4.3,
+            updated: "2024-01-06",
+            features: ["营销文案", "模板丰富", "团队协作"],
+            url: "https://jasper.ai"
+        },
 
-            <div class="tools-grid">
-                <!-- ChatGPT -->
-                <div class="tool-card" data-category="chat">
-                    <div class="tool-name">ChatGPT</div>
-                    <div class="tool-tags">
-                        <span class="tag global">国际</span>
-                        <span class="tag paid">付费</span>
+        // 编程开发类 (16款)
+        {
+            id: 17,
+            name: "GitHub Copilot",
+            category: ["code"],
+            description: "AI代码助手，支持多种语言，智能代码补全，开发效率提升明显",
+            tags: ["global", "paid"],
+            rating: 4.8,
+            updated: "2024-01-14",
+            features: ["代码补全", "多语言", "IDE集成"],
+            url: "https://github.com/features/copilot"
+        },
+        {
+            id: 18,
+            name: "Cursor",
+            category: ["code"],
+            description: "AI驱动的代码编辑器，内置对话编程功能，开发体验流畅",
+            tags: ["global", "free"],
+            rating: 4.6,
+            updated: "2024-01-11",
+            features: ["对话编程", "智能编辑", "免费使用"],
+            url: "https://cursor.sh"
+        },
+
+        // 音乐音频类 (12款)
+        {
+            id: 19,
+            name: "Suno AI",
+            category: ["music"],
+            description: "AI音乐生成平台，可生成完整歌曲，支持多种音乐风格",
+            tags: ["global", "free"],
+            rating: 4.5,
+            updated: "2024-01-09",
+            features: ["完整歌曲", "多风格", "简单易用"],
+            url: "https://suno.ai"
+        },
+        {
+            id: 20,
+            name: "Udio",
+            category: ["music"],
+            description: "高质量AI音乐生成，音质优秀，风格多样，创作自由度大",
+            tags: ["global", "free"],
+            rating: 4.4,
+            updated: "2024-01-07",
+            features: ["高音质", "风格多样", "创作自由"],
+            url: "https://udio.com"
+        },
+
+        // 办公效率类 (22款)
+        {
+            id: 21,
+            name: "Grammarly",
+            category: ["writing", "productivity"],
+            description: "英文写作助手，语法检查和风格优化，提升写作质量",
+            tags: ["global", "freemium"],
+            rating: 4.7,
+            updated: "2024-01-12",
+            features: ["语法检查", "风格优化", "多平台"],
+            url: "https://grammarly.com"
+        },
+        {
+            id: 22,
+            name: "WPS AI",
+            category: ["productivity"],
+            description: "国产Office套件AI功能，文档处理优秀，中文支持好",
+            tags: ["china", "free"],
+            rating: 4.2,
+            updated: "2024-01-10",
+            features: ["中文优化", "文档处理", "免费使用"],
+            url: "https://wps.cn"
+        }
+        // 这里可以继续添加更多工具...
+    ];
+
+    // 当前状态管理
+    let currentState = {
+        activeCategory: 'all',
+        searchQuery: '',
+        currentView: 'grid',
+        filteredTools: [...aiTools]
+    };
+
+    // DOM 元素引用
+    const elements = {
+        toolsGrid: document.getElementById('toolsGrid'),
+        searchInput: document.getElementById('searchInput'),
+        navItems: document.querySelectorAll('.nav-item'),
+        tabs: document.querySelectorAll('.tab'),
+        viewButtons: document.querySelectorAll('.view-btn')
+    };
+
+    // 初始化函数
+    function init() {
+        renderTools(currentState.filteredTools);
+        setupEventListeners();
+        updateActiveNav();
+    }
+
+    // 设置事件监听器
+    function setupEventListeners() {
+        // 搜索功能
+        elements.searchInput.addEventListener('input', handleSearch);
+        
+        // 导航项点击
+        elements.navItems.forEach(item => {
+            item.addEventListener('click', handleNavClick);
+        });
+        
+        // 分类标签点击
+        elements.tabs.forEach(tab => {
+            tab.addEventListener('click', handleTabClick);
+        });
+        
+        // 视图切换
+        elements.viewButtons.forEach(btn => {
+            btn.addEventListener('click', handleViewChange);
+        });
+    }
+
+    // 处理导航点击
+    function handleNavClick(event) {
+        const category = event.currentTarget.getAttribute('onclick')?.match(/'([^']+)'/)?.[1];
+        if (category) {
+            filterTools(category);
+            updateActiveNav(event.currentTarget);
+        }
+    }
+
+    // 处理标签点击
+    function handleTabClick(event) {
+        const category = event.currentTarget.getAttribute('onclick')?.match(/'([^']+)'/)?.[1];
+        if (category) {
+            filterTools(category);
+            updateActiveTab(event.currentTarget);
+        }
+    }
+
+    // 处理搜索
+    function handleSearch(event) {
+        currentState.searchQuery = event.target.value.toLowerCase();
+        applyFilters();
+    }
+
+    // 处理视图切换
+    function handleViewChange(event) {
+        const view = event.currentTarget.getAttribute('onclick')?.match(/'([^']+)'/)?.[1];
+        if (view) {
+            changeView(view);
+            updateActiveView(event.currentTarget);
+        }
+    }
+
+    // 工具筛选函数
+    function filterTools(category) {
+        currentState.activeCategory = category;
+        applyFilters();
+    }
+
+    // 应用所有筛选条件
+    function applyFilters() {
+        let filtered = aiTools;
+        
+        // 分类筛选
+        if (currentState.activeCategory !== 'all') {
+            filtered = filtered.filter(tool => 
+                tool.category.includes(currentState.activeCategory)
+            );
+        }
+        
+        // 搜索筛选
+        if (currentState.searchQuery) {
+            filtered = filtered.filter(tool =>
+                tool.name.toLowerCase().includes(currentState.searchQuery) ||
+                tool.description.toLowerCase().includes(currentState.searchQuery) ||
+                tool.tags.some(tag => tag.toLowerCase().includes(currentState.searchQuery))
+            );
+        }
+        
+        currentState.filteredTools = filtered;
+        renderTools(filtered);
+        updateToolCount();
+    }
+
+    // 渲染工具卡片
+    function renderTools(tools) {
+        if (tools.length === 0) {
+            elements.toolsGrid.innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--text-secondary);">
+                    <div style="font-size: 3rem; margin-bottom: 16px;">🔍</div>
+                    <h3 style="margin-bottom: 8px;">未找到相关工具</h3>
+                    <p>尝试调整搜索关键词或选择其他分类</p>
+                </div>
+            `;
+            return;
+        }
+
+        elements.toolsGrid.innerHTML = tools.map(tool => `
+            <div class="tool-card" data-category="${tool.category[0]}">
+                <div class="tool-header">
+                    <div>
+                        <div class="tool-name">${tool.name}</div>
+                        <div class="tool-meta">
+                            <div class="tool-rating">
+                                <span>⭐</span>
+                                <span>${tool.rating}</span>
+                            </div>
+                            <div class="tool-updated">${formatDate(tool.updated)}</div>
+                        </div>
                     </div>
-                    <p class="tool-desc">OpenAI开发的对话AI，支持复杂问题解答、代码编写、创意写作</p>
-                    <a href="https://chat.openai.com" class="tool-link" target="_blank">访问官网 →</a>
                 </div>
                 
-                <!-- Midjourney -->
-                <div class="tool-card" data-category="design">
-                    <div class="tool-name">Midjourney</div>
-                    <div class="tool-tags">
-                        <span class="tag global">国际</span>
-                        <span class="tag paid">付费</span>
-                    </div>
-                    <p class="tool-desc">艺术级AI图像生成，通过Discord使用，创意设计首选</p>
-                    <a href="https://midjourney.com" class="tool-link" target="_blank">访问官网 →</a>
+                <div class="tool-tags">
+                    ${tool.tags.map(tag => `<span class="tag ${tag}">${getTagText(tag)}</span>`).join('')}
                 </div>
                 
-                <!-- 文心一言 -->
-                <div class="tool-card" data-category="chat">
-                    <div class="tool-name">文心一言</div>
-                    <div class="tool-tags">
-                        <span class="tag china">国产</span>
-                        <span class="tag free">免费</span>
-                    </div>
-                    <p class="tool-desc">百度开发的对话AI，中文理解优秀，适合中文场景</p>
-                    <a href="https://yiyan.baidu.com" class="tool-link" target="_blank">立即使用 →</a>
+                <p class="tool-desc">${tool.description}</p>
+                
+                <div class="tool-features">
+                    ${tool.features.map(feature => `
+                        <div class="feature">
+                            <span>✓</span>
+                            <span>${feature}</span>
+                        </div>
+                    `).join('')}
                 </div>
                 
-                <!-- 通义千问 -->
-                <div class="tool-card" data-category="chat">
-                    <div class="tool-name">通义千问</div>
-                    <div class="tool-tags">
-                        <span class="tag china">国产</span>
-                        <span class="tag free">免费</span>
-                    </div>
-                    <p class="tool-desc">阿里云的大模型，在编程和数据分析方面表现突出</p>
-                    <a href="https://tongyi.aliyun.com" class="tool-link" target="_blank">访问官网 →</a>
-                </div>
-                
-                <!-- Stable Diffusion -->
-                <div class="tool-card" data-category="design">
-                    <div class="tool-name">Stable Diffusion</div>
-                    <div class="tool-tags">
-                        <span class="tag global">国际</span>
-                        <span class="tag free">开源</span>
-                    </div>
-                    <p class="tool-desc">开源图像生成模型，可本地部署，高度自定义</p>
-                    <a href="https://stability.ai" class="tool-link" target="_blank">访问官网 →</a>
-                </div>
-                
-                <!-- Gemini -->
-                <div class="tool-card" data-category="chat">
-                    <div class="tool-name">Gemini</div>
-                    <div class="tool-tags">
-                        <span class="tag global">谷歌</span>
-                        <span class="tag free">免费</span>
-                    </div>
-                    <p class="tool-desc">谷歌最新大模型，多模态能力强，集成谷歌生态</p>
-                    <a href="https://gemini.google.com" class="tool-link" target="_blank">访问官网 →</a>
+                <div class="tool-actions">
+                    <a href="${tool.url}" class="tool-link" target="_blank" onclick="trackClick('${tool.name}')">
+                        访问官网 →
+                    </a>
+                    <button class="tool-link secondary" onclick="showToolDetail(${tool.id})">
+                        查看详情
+                    </button>
                 </div>
             </div>
-        </div>
-    </main>
+        `).join('');
+    }
 
-    <script>
-        // 工具筛选功能
-        function filterTools(category) {
-            // 更新导航激活状态
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            event.target.classList.add('active');
-            
-            // 筛选工具
-            const tools = document.querySelectorAll('.tool-card');
-            tools.forEach(tool => {
-                if (category === 'all' || tool.dataset.category === category) {
-                    tool.style.display = 'block';
-                } else {
-                    tool.style.display = 'none';
-                }
-            });
-            
-            // 移动端关闭侧边栏
-            if (window.innerWidth <= 768) {
-                document.querySelector('.sidebar').classList.remove('active');
-            }
-        }
-
-        // 搜索功能
-        document.getElementById('searchInput').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const tools = document.querySelectorAll('.tool-card');
-            
-            tools.forEach(tool => {
-                const toolName = tool.querySelector('.tool-name').textContent.toLowerCase();
-                const toolDesc = tool.querySelector('.tool-desc').textContent.toLowerCase();
-                
-                if (toolName.includes(searchTerm) || toolDesc.includes(searchTerm)) {
-                    tool.style.display = 'block';
-                } else {
-                    tool.style.display = 'none';
-                }
-            });
+    // 更新活跃导航状态
+    function updateActiveNav(activeElement) {
+        elements.navItems.forEach(item => {
+            item.classList.remove('active');
         });
+        if (activeElement) {
+            activeElement.classList.add('active');
+        } else {
+            // 默认激活"全部工具"
+            document.querySelector('.nav-item[onclick*="all"]').classList.add('active');
+        }
+    }
 
-        // 移动端侧边栏切换
-        function toggleSidebar() {
-            document.querySelector('.sidebar').classList.toggle('active');
+    // 更新活跃标签状态
+    function updateActiveTab(activeElement) {
+        elements.tabs.forEach(tab => {
+            tab.classList.remove('active');
+        });
+        if (activeElement) {
+            activeElement.classList.add('active');
         }
+    }
 
-        // 特色功能占位函数
-        function showToolMatcher() {
-            alert('工具匹配器功能即将上线！');
+    // 更新活跃视图状态
+    function updateActiveView(activeElement) {
+        elements.viewButtons.forEach(btn => {
+            btn.classList.remove('active');
+        });
+        if (activeElement) {
+            activeElement.classList.add('active');
         }
-        
-        function showComparison() {
-            alert('工具对比功能开发中...');
-        }
-        
-        function showTutorials() {
-            alert('使用教程页面准备中...');
-        }
-        
-        function showNews() {
-            alert('AI资讯模块即将发布！');
-        }
+    }
 
-        // 初始化显示所有工具
-        window.onload = function() {
-            filterTools('all');
+    // 更新工具数量显示
+    function updateToolCount() {
+        // 这里可以更新导航中的数量徽章
+        console.log(`当前显示 ${currentState.filteredTools.length} 个工具`);
+    }
+
+    // 视图切换
+    function changeView(view) {
+        currentState.currentView = view;
+        if (view === 'list') {
+            elements.toolsGrid.style.gridTemplateColumns = '1fr';
+        } else {
+            elements.toolsGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(320px, 1fr))';
+        }
+    }
+
+    // 工具函数
+    function formatDate(dateString) {
+        return new Date(dateString).toLocaleDateString('zh-CN');
+    }
+
+    function getTagText(tag) {
+        const tagMap = {
+            'global': '国际',
+            'china': '国产',
+            'free': '免费',
+            'paid': '付费',
+            'freemium': '免费+',
+            'hot': '热门',
+            'new': '新上线'
         };
-    </script>
-</body>
-</html>
+        return tagMap[tag] || tag;
+    }
+
+    // 侧边栏切换（移动端）
+    function toggleSidebar() {
+        document.querySelector('.sidebar').classList.toggle('active');
+    }
+
+    // 点击追踪
+    function trackClick(toolName) {
+        console.log(`工具点击: ${toolName}`);
+        // 这里可以接入数据分析
+    }
+
+    // 工具详情展示（占位函数）
+    function showToolDetail(toolId) {
+        const tool = aiTools.find(t => t.id === toolId);
+        if (tool) {
+            alert(`即将展示 ${tool.name} 的详细信息和教程...`);
+            // 实际实现时可以打开模态框或跳转到详情页
+        }
+    }
+
+    // 特色功能（占位函数）
+    function showToolMatcher() {
+        alert('智能匹配器功能开发中...');
+    }
+    
+    function showComparison() {
+        alert('工具对比功能开发中...');
+    }
+    
+    function showTutorials() {
+        alert('使用教程页面准备中...');
+    }
+    
+    function showNews() {
+        alert('AI资讯模块即将发布！');
+    }
+
+    // 页面加载完成后初始化
+    document.addEventListener('DOMContentLoaded', init);
+</script>
