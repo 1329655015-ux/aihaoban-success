@@ -1,1 +1,30 @@
-{}
+{
+  "affiliateConfig": {
+    "enabled": true,
+    "defaultCommission": "5%",
+    "trackingDomain": "https://aifanxing.com/go/",
+    "parameters": "?utm_source=ai-tools&utm_medium=affiliate"
+  },
+  "affiliateLinks": {
+    "文心一言": {
+      "url": "https://yiyan.baidu.com",
+      "affiliateUrl": "https://aifanxing.com/go/baidu-yiyan",
+      "commission": "3%"
+    },
+    "Gemini": {
+      "url": "https://gemini.google.com",
+      "affiliateUrl": "https://aifanxing.com/go/google-gemini",
+      "commission": "5%"
+    },
+    "通义千问": {
+      "url": "https://tongyi.aliyun.com",
+      "affiliateUrl": "https://aifanxing.com/go/aliyun-tongyi",
+      "commission": "4%"
+    },
+    "Grok": {
+      "url": "https://grok.x.ai",
+      "affiliateUrl": "https://aifanxing.com/go/xai-grok",
+      "commission": "6%"
+    }
+  }
+}
