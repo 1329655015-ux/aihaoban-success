@@ -2,40 +2,29 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('AI工具集应用已启动');
     
-    // 初始化应用状态
-    AppState.init();
+    // 初始化所有模块
+    try {
+        // 初始化应用状态
+        AppState.init();
+        
+        // 初始化功能模块
+        Navigation.init();
+        Search.init();
+        Filters.init();
+        
+        console.log('所有模块初始化完成');
+        
+        // 添加一些示例工具数据（如果数据库为空）
+        if (ToolsDB.getAllTools().length === 0) {
+            console.warn('工具数据库为空，请检查数据加载');
+        }
+        
+    } catch (error) {
+        console.error('应用初始化错误:', error);
+    }
     
-    // 这里可以添加其他初始化代码
-    // 比如事件监听器、功能模块初始化等
-    
-    // 临时示例：添加一些交互功能
-    const functionTags = document.querySelectorAll('.function-tags .tag');
-    functionTags.forEach(tag => {
-        tag.addEventListener('click', function() {
-            // 移除其他标签的active类
-            functionTags.forEach(t => t.classList.remove('active'));
-            // 给当前点击的标签添加active类
-            this.classList.add('active');
-            
-            // 这里可以添加分类筛选逻辑
-            const category = this.textContent;
-            console.log('选择了分类:', category);
-        });
-    });
-    
-    // 底部导航交互
-    const navButtons = document.querySelectorAll('.bottom-nav .nav-btn');
-    navButtons.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            // 移除其他按钮的active类
-            navButtons.forEach(b => b.classList.remove('active'));
-            // 给当前点击的按钮添加active类
-            this.classList.add('active');
-            
-            // 这里可以添加页面切换逻辑
-            const page = this.querySelector('span:last-child').textContent;
-            console.log('切换到页面:', page);
-        });
+    // 添加全局错误处理
+    window.addEventListener('error', function(e) {
+        console.error('全局错误:', e.error);
     });
 });
