@@ -1,1 +1,58 @@
-/* core */
+/* 网格布局 */
+.grid {
+    display: grid;
+    gap: var(--space-md);
+}
+
+.grid-1 { grid-template-columns: 1fr; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* 工具卡片网格 */
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-lg);
+    padding: var(--space-md) 0;
+}
+
+/* 主要布局区域 */
+.main-content {
+    padding: var(--space-lg) 0;
+    min-height: calc(100vh - 120px);
+}
+
+/* 功能区布局 */
+.functions-section {
+    margin-bottom: var(--space-xl);
+}
+
+.function-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+}
+
+/* 头部布局 */
+.header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md);
+}
+
+/* 底部导航布局 */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-around;
+    padding: var(--space-sm) 0;
+    backdrop-filter: blur(8px);
+}
