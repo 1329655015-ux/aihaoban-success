@@ -3,187 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI好伴 - 你的智能工具导航伙伴</title>
+    <title>AI好伴 - 精选AI工具集合</title>
     <style>
-        /* 基础样式 - 保证一定能显示 */
+        :root {
+            --primary: #4a6cf7;
+            --primary-dark: #3a5ce5;
+            --secondary: #6c757d;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --border: #e9ecef;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
         }
         
         body {
-            font-family: Arial, sans-serif;
-            background: white;
-            color: #333;
+            background-color: #f5f7ff;
+            color: var(--dark);
             line-height: 1.6;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 20px;
         }
         
-        /* 头部 */
-        .header {
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, var(--primary), #6a82fb);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* 导航样式 */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
             background: white;
-            border-bottom: 1px solid #eee;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
+            border-radius: var(--radius);
+            padding: 0.5rem;
+            margin: 1.5rem auto;
+            box-shadow: var(--shadow);
+            max-width: 800px;
         }
         
-        .logo h1 {
-            color: #2563eb;
-            font-size: 24px;
-            font-weight: bold;
+        .nav-tab {
+            padding: 0.75rem 1.5rem;
+            margin: 0 0.25rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
         }
         
-        /* 主要内容 */
-        .main-content {
-            padding: 30px 0;
-            min-height: 80vh;
+        .nav-tab:hover {
+            background-color: rgba(74, 108, 247, 0.1);
         }
         
-        /* 工具网格 */
+        .nav-tab.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* 内容区域 */
+        .section-title {
+            text-align: center;
+            margin: 2rem 0 1.5rem;
+            color: var(--dark);
+            font-size: 1.8rem;
+        }
+        
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
         }
         
-        /* 工具卡片 */
         .tool-card {
             background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
         .tool-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tool-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+        }
+        
+        .tool-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), #6a82fb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 1rem;
+            font-size: 1.2rem;
         }
         
         .tool-name {
-            font-size: 20px;
-            font-weight: bold;
-            color: #1a1a1a;
-            margin-bottom: 10px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .tool-developer {
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+        
+        .tool-body {
+            padding: 1.5rem;
         }
         
         .tool-description {
-            color: #666;
-            margin-bottom: 15px;
-            font-size: 14px;
+            margin-bottom: 1rem;
+            color: #555;
         }
         
-        .tool-features {
+        .tool-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
-            margin-bottom: 15px;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
         }
         
-        .feature-tag {
-            background: #f0f8ff;
-            color: #2563eb;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 8px 16px;
-            background: #2563eb;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 14px;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn:hover {
-            background: #1d4ed8;
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 1px solid #2563eb;
-            color: #2563eb;
-        }
-        
-        .btn-outline:hover {
-            background: #2563eb;
-            color: white;
+        .tag {
+            background: rgba(74, 108, 247, 0.1);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
         }
         
         .tool-actions {
             display: flex;
-            gap: 10px;
+            gap: 0.75rem;
         }
         
-        /* 底部导航 */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            border-top: 1px solid #eee;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-        }
-        
-        .nav-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: #666;
-            font-size: 12px;
-            padding: 5px;
-        }
-        
-        .nav-btn.active {
-            color: #2563eb;
-        }
-        
-        .nav-btn .icon {
-            font-size: 18px;
-            margin-bottom: 3px;
-        }
-        
-        /* 分类标签 */
-        .function-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        
-        .tag {
-            display: inline-block;
-            padding: 6px 12px;
-            background: #f5f5f5;
-            color: #666;
-            border-radius: 20px;
-            font-size: 14px;
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius);
+            font-weight: 500;
             cursor: pointer;
-            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        .tag.active {
-            background: #2563eb;
+        .btn-primary {
+            background: var(--primary);
             color: white;
-            border-color: #2563eb;
+            flex: 1;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(74, 108, 247, 0.1);
+        }
+        
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
         }
         
         /* 响应式设计 */
@@ -192,193 +227,147 @@
                 grid-template-columns: 1fr;
             }
             
-            .container {
-                padding: 0 10px;
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .nav-tab {
+                flex: 1;
+                min-width: 120px;
+                margin-bottom: 0.5rem;
+                text-align: center;
             }
         }
     </style>
 </head>
 <body>
-    <!-- 顶部导航 -->
-    <header class="header">
+    <header>
         <div class="container">
-            <div class="logo">
-                <h1>AI好伴</h1>
-            </div>
+            <h1 class="logo">AI好伴</h1>
+            <p class="tagline">发现最适合您的AI工具，提升工作效率与创造力</p>
         </div>
     </header>
-
-    <!-- 主要内容 -->
-    <main class="main-content">
-        <div class="container">
-            <h2>功能介绍</h2>
-            
-            <div class="function-tags">
-                <span class="tag active">全部工具</span>
-                <span class="tag">对话助手</span>
-                <span class="tag">写作创作</span>
-                <span class="tag">图像设计</span>
-                <span class="tag">视频制作</span>
+    
+    <div class="container">
+        <div class="nav-tabs">
+            <div class="nav-tab active">全部工具</div>
+            <div class="nav-tab">对话助手</div>
+            <div class="nav-tab">写作创作</div>
+            <div class="nav-tab">图像设计</div>
+            <div class="nav-tab">视频制作</div>
+        </div>
+        
+        <h2 class="section-title">精选AI工具</h2>
+        
+        <div class="tools-grid">
+            <!-- 文心一言 -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">文</div>
+                    <div>
+                        <h3 class="tool-name">文心一言</h3>
+                        <p class="tool-developer">百度开发</p>
+                    </div>
+                </div>
+                <div class="tool-body">
+                    <p class="tool-description">百度开发的对话AI，中文理解优秀，适合中文场景，集成百度生态。</p>
+                    <div class="tool-tags">
+                        <span class="tag">中文优化</span>
+                        <span class="tag">多维化</span>
+                        <span class="tag">百度集成</span>
+                    </div>
+                    <div class="tool-actions">
+                        <button class="btn btn-primary">访问官网</button>
+                        <button class="btn btn-outline">查看详情</button>
+                    </div>
+                </div>
             </div>
             
-            <h3>精选AI工具</h3>
+            <!-- Grok -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">G</div>
+                    <div>
+                        <h3 class="tool-name">Grok</h3>
+                        <p class="tool-developer">马斯克AI开发</p>
+                    </div>
+                </div>
+                <div class="tool-body">
+                    <p class="tool-description">马斯克AI开发，实时网络访问，回答风格幽默直接，信息更新快。</p>
+                    <div class="tool-tags">
+                        <span class="tag">实时网络</span>
+                        <span class="tag">幽默风格</span>
+                        <span class="tag">信息更新快</span>
+                    </div>
+                    <div class="tool-actions">
+                        <button class="btn btn-primary">访问官网</button>
+                        <button class="btn btn-outline">查看详情</button>
+                    </div>
+                </div>
+            </div>
             
-            <div class="tools-grid" id="toolsContainer">
-                <!-- 工具卡片会通过JavaScript动态生成 -->
-                <div class="tool-card">
-                    <h3 class="tool-name">文心一言</h3>
-                    <p class="tool-description">百度开发的对话AI，中文理解优秀，适合中文场景，集成百度生态</p>
-                    <div class="tool-features">
-                        <span class="feature-tag">中文优化</span>
-                        <span class="feature-tag">多模态</span>
-                        <span class="feature-tag">百度集成</span>
+            <!-- 即梦AI -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">即</div>
+                    <div>
+                        <h3 class="tool-name">即梦AI</h3>
+                        <p class="tool-developer">文生视频工具</p>
+                    </div>
+                </div>
+                <div class="tool-body">
+                    <p class="tool-description">文生视频工具，每天免费使用，支持多种视频风格。</p>
+                    <div class="tool-tags">
+                        <span class="tag">视频生成</span>
+                        <span class="tag">免费使用</span>
+                        <span class="tag">多种风格</span>
                     </div>
                     <div class="tool-actions">
-                        <a href="https://yiyan.baidu.com" class="btn" target="_blank">访问官网</a>
+                        <button class="btn btn-primary">访问官网</button>
                         <button class="btn btn-outline">查看详情</button>
                     </div>
                 </div>
-                
-                <div class="tool-card">
-                    <h3 class="tool-name">Gemini</h3>
-                    <p class="tool-description">谷歌最新大模型，多模态能力强，集成谷歌生态，支持图像理解</p>
-                    <div class="tool-features">
-                        <span class="feature-tag">多模态</span>
-                        <span class="feature-tag">谷歌集成</span>
-                        <span class="feature-tag">实时搜索</span>
-                    </div>
-                    <div class="tool-actions">
-                        <a href="https://gemini.google.com" class="btn" target="_blank">访问官网</a>
-                        <button class="btn btn-outline">查看详情</button>
+            </div>
+            
+            <!-- 链接写作 -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">链</div>
+                    <div>
+                        <h3 class="tool-name">链接写作</h3>
+                        <p class="tool-developer">AI写作助手</p>
                     </div>
                 </div>
-                
-                <div class="tool-card">
-                    <h3 class="tool-name">通义千问</h3>
-                    <p class="tool-description">阿里云的大模型，在编程和数据分析方面表现突出，适合技术用户</p>
-                    <div class="tool-features">
-                        <span class="feature-tag">编程辅助</span>
-                        <span class="feature-tag">数据分析</span>
-                        <span class="feature-tag">阿里生态</span>
+                <div class="tool-body">
+                    <p class="tool-description">AI一键生成小说，多种模板选择，支持长篇创作。</p>
+                    <div class="tool-tags">
+                        <span class="tag">创作辅助</span>
+                        <span class="tag">小说模板</span>
+                        <span class="tag">长篇支持</span>
                     </div>
                     <div class="tool-actions">
-                        <a href="https://tongyi.aliyun.com" class="btn" target="_blank">访问官网</a>
-                        <button class="btn btn-outline">查看详情</button>
-                    </div>
-                </div>
-                
-                <div class="tool-card">
-                    <h3 class="tool-name">Grok</h3>
-                    <p class="tool-description">马斯克xAI开发，实时网络访问，回答风格幽默直接，信息更新快</p>
-                    <div class="tool-features">
-                        <span class="feature-tag">实时网络</span>
-                        <span class="feature-tag">幽默风格</span>
-                        <span class="feature-tag">快速响应</span>
-                    </div>
-                    <div class="tool-actions">
-                        <a href="https://grok.x.ai" class="btn" target="_blank">访问官网</a>
-                        <button class="btn btn-outline">查看详情</button>
-                    </div>
-                </div>
-                
-                <div class="tool-card">
-                    <h3 class="tool-name">即梦AI</h3>
-                    <p class="tool-description">文生视频/图生视频，每天免费用，支持多种视频风格</p>
-                    <div class="tool-features">
-                        <span class="feature-tag">视频生成</span>
-                        <span class="feature-tag">免费额度</span>
-                        <span class="feature-tag">多种风格</span>
-                    </div>
-                    <div class="tool-actions">
-                        <a href="#" class="btn">访问官网</a>
-                        <button class="btn btn-outline">查看详情</button>
-                    </div>
-                </div>
-                
-                <div class="tool-card">
-                    <h3 class="tool-name">链接写作</h3>
-                    <p class="tool-description">AI一键生成小说，多种模板选择，支持长篇创作</p>
-                    <div class="tool-features">
-                        <span class="feature-tag">创作辅助</span>
-                        <span class="feature-tag">小说模板</span>
-                        <span class="feature-tag">长篇支持</span>
-                    </div>
-                    <div class="tool-actions">
-                        <a href="#" class="btn">访问官网</a>
+                        <button class="btn btn-primary">访问官网</button>
                         <button class="btn btn-outline">查看详情</button>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
-
-    <!-- 底部导航 -->
-    <footer class="bottom-nav">
-        <a href="#" class="nav-btn active">
-            <span class="icon">🏠</span>
-            <span>首页</span>
-        </a>
-        <a href="#" class="nav-btn">
-            <span class="icon">📄</span>
-            <span>我的文档</span>
-        </a>
-        <a href="#" class="nav-btn">
-            <span class="icon">📝</span>
-            <span>我的内容</span>
-        </a>
-        <a href="#" class="nav-btn">
-            <span class="icon">🖼️</span>
-            <span>我的素材</span>
-        </a>
-        <a href="#" class="nav-btn">
-            <span class="icon">🔗</span>
-            <span>我的分享</span>
-        </a>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>AI好伴 - 为您精选优质AI工具 | aihaoban.cn</p>
+        </div>
     </footer>
 
-    <!-- 简单的JavaScript交互 -->
     <script>
-        // 页面加载完成后执行
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('AI好伴网站已加载！');
-            
-            // 分类标签点击事件
-            const tags = document.querySelectorAll('.tag');
-            tags.forEach(tag => {
-                tag.addEventListener('click', function() {
-                    // 移除其他标签的active类
-                    tags.forEach(t => t.classList.remove('active'));
-                    // 给当前点击的标签添加active类
-                    this.classList.add('active');
-                    
-                    const category = this.textContent;
-                    alert('您选择了: ' + category);
-                });
-            });
-            
-            // 底部导航点击事件
-            const navButtons = document.querySelectorAll('.nav-btn');
-            navButtons.forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // 移除其他按钮的active类
-                    navButtons.forEach(b => b.classList.remove('active'));
-                    // 给当前点击的按钮添加active类
-                    this.classList.add('active');
-                    
-                    const pageName = this.querySelector('span:last-child').textContent;
-                    console.log('切换到页面:', pageName);
-                });
-            });
-            
-            // 查看详情按钮点击事件
-            const detailButtons = document.querySelectorAll('.btn-outline');
-            detailButtons.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const toolName = this.closest('.tool-card').querySelector('.tool-name').textContent;
-                    alert('查看 ' + toolName + ' 的详细信息');
-                });
+        // 添加导航标签交互
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 这里可以添加切换显示不同类别工具的逻辑
             });
         });
     </script>
